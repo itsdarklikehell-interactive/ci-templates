@@ -48,7 +48,7 @@ jobs:
         run: |
           python3 -c "
           import yaml, sys
-          reusable = ['ci-node.yml', 'ci-python.yml', 'ci-go.yml', 'ci-generic.yml', 'ci-shell.yml']
+          reusable = ['ci-node.yml', 'ci-python.yml', 'ci-go.yml', 'ci-generic.yml', 'ci-shell.yml', 'gource-reusable.yml']
           for wf in reusable:
               path = f'.github/workflows/{wf}'
               with open(path) as f:

@@ -24,6 +24,11 @@ Single source of truth for lint / typecheck / test / build across all repos. Eac
 | [`ci-go.yml`](.github/workflows/ci-go.yml) | Go projects | Go |
 | [`ci-generic.yml`](.github/workflows/ci-generic.yml) | Docker / Shell / other | Any |
 | [`ci-shell.yml`](.github/workflows/ci-shell.yml) | Shell script projects | Bash, Shell |
+| [`gource-reusable.yml`](.github/workflows/gource-reusable.yml) | Shared Gource development video | Any |
+| [`auto-assign.yml`](.github/workflows/auto-assign.yml) | Assign new pull requests | GitHub |
+| [`labeler.yml`](.github/workflows/labeler.yml) | Label pull requests | GitHub |
+| [`release.yml`](.github/workflows/release.yml) | Publish GitHub releases | GitHub |
+| [`stale.yml`](.github/workflows/stale.yml) | Mark stale issues and pull requests | GitHub |
 
 ## Quick Start
 

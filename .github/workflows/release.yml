@@ -12,6 +12,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7

@@ -4,6 +4,9 @@ name: Generic / Docker / Shell CI (reusable)
 # Dockerfile or shell scripts worth validating.
 # Called via `uses: itsdarklikehell/ci-templates/.github/workflows/ci-generic.yml@v1`
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:

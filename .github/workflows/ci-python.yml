@@ -11,6 +11,9 @@ name: Python CI (reusable)
 # Tools are invoked via `python -m` so they resolve from site-packages regardless
 # of whether the user install dir is on PATH.
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:

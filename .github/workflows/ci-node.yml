@@ -5,6 +5,9 @@ name: Node / TypeScript CI (reusable)
 # Designed to be safe on first rollout: it only runs a step when the
 # corresponding package.json script (or override) actually exists.
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:

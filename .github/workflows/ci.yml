@@ -12,6 +12,9 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v7
 
@@ -48,12 +51,13 @@ jobs:
         run: |
           python3 -c "
           import yaml, sys
-          reusable = ['ci-node.yml', 'ci-python.yml', 'ci-go.yml', 'ci-generic.yml', 'ci-shell.yml']
+          reusable = ['ci-node.yml', 'ci-python.yml', 'ci-go.yml', 'ci-generic.yml', 'ci-shell.yml', 'gource-reusable.yml']
           for wf in reusable:
               path = f'.github/workflows/{wf}'
               with open(path) as f:
                   data = yaml.safe_load(f)
-              assert 'workflow_call' in data.get('on', {}), f'{wf} missing workflow_call trigger'
+              triggers = data.get('on', data.get(True, {}))
+              assert 'workflow_call' in triggers, f'{wf} missing workflow_call trigger'
               print(f'✓ {wf} has workflow_call')
           "
 

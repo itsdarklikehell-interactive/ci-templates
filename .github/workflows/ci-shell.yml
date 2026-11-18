@@ -7,6 +7,9 @@ name: Shell CI (reusable)
 # they report, but do not paint repos red for pre-existing style issues.
 # Promote to a hard gate in a future @v2 once fleets adopt shellcheck cleanly.
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:

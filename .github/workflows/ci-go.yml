@@ -3,6 +3,9 @@ name: Go CI (reusable)
 # Reusable CI for Go repositories.
 # Called via `uses: itsdarklikehell/ci-templates/.github/workflows/ci-go.yml@v1`
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:

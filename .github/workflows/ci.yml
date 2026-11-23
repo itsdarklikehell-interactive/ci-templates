@@ -12,6 +12,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
 
@@ -53,7 +54,8 @@ jobs:
               path = f'.github/workflows/{wf}'
               with open(path) as f:
                   data = yaml.safe_load(f)
-              assert 'workflow_call' in data.get('on', {}), f'{wf} missing workflow_call trigger'
+              triggers = data.get('on', data.get(True, {}))
+              assert 'workflow_call' in triggers, f'{wf} missing workflow_call trigger'
               print(f'✓ {wf} has workflow_call')
           "
 
@@ -69,15 +71,13 @@ jobs:
               path = os.path.join(wf_dir, fname)
               with open(path) as f:
                   data = yaml.safe_load(f)
-              # Check top-level permissions
+              # Top-level permissions are inherited by every job. Require
+              # per-job permissions only when no workflow-level policy exists.
               if 'permissions' not in data:
-                  print(f'✗ {fname} missing top-level permissions')
-                  sys.exit(1)
-              # Check job-level permissions
-              for job_name, job in data.get('jobs', {}).items():
-                  if 'permissions' not in job:
-                      print(f'✗ {fname} job {job_name} missing permissions')
-                      sys.exit(1)
+                  for job_name, job in data.get('jobs', {}).items():
+                      if 'permissions' not in job:
+                          print(f'✗ {fname} job {job_name} missing permissions')
+                          sys.exit(1)
               print(f'✓ {fname} has permissions')
           "
 
@@ -128,7 +128,7 @@ jobs:
               path = os.path.join(wf_dir, fname)
               with open(path) as f:
                   data = yaml.safe_load(f)
-              triggers = data.get('on', {})
+              triggers = data.get('on', data.get(True, {}))
               if 'pull_request_target' in triggers:
                   # Must have explicit permissions
                   if 'permissions' not in data:
